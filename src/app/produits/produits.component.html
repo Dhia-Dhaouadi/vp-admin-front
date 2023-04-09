@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-10">
+        <h6 class="card-title"><i class="feather icon-tag"></i> Produits</h6>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-outline-primary btn-icon-text me-2
+          mb-2 mb-md-0" (click)="openXlModal(AddProduct)">
+          <i class="feather icon-plus"></i>
+          Ajouter Produit
+        </button>
+      </div>
+    </div>
+    <ng-template #AddProduct let-modal class="border">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <a routerLink="/" class="sidebar-brand nobleui-logo">
+                VENTE<span>PRIVÉE</span>
+               </a>
+              <div class="row m-2">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

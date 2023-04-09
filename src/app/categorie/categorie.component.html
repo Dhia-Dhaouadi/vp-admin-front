@@ -1,0 +1,71 @@
+
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title"><i class="feather icon-box"></i> Catégories</h6>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Catégorie</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of categorie">
+            <th>{{c.id}}</th>
+            <td>{{c.Categorie}}</td>
+            <td><button type="button" class="btn btn-primary" (click)="openXlModal(voircategorie)"><i class="mdi mdi-eye"></i></button>&nbsp;
+              <button type="button" class="btn btn-primary" (click)="openXlModal(modifiercategorie)"><i class="mdi mdi-file-edit-outline"></i></button></td>
+              <ng-template #voircategorie let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                         </a>
+                        <div class="row m-2">
+                          <h3 ><i class="feather icon-box"></i> {{c.Categorie}}</h3>
+                          <div class="row mt-3">
+                           <img src={{c.ImageCouverture}}>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #modifiercategorie let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                         </a>
+                        <div class="row m-2">
+                          <h3><i class="feather icon-box"></i> Ajouter image de couverture pour  {{c.Categorie}}</h3>
+                          <div class="row mt-3">
+                            <div class="col-md-6">
+                              <input type="file" class="form-control" (change)=" uploadImage($event)" id="exampleInput" autocomplete="off">
+                            </div>
+                            <div class="col-md-6">
+                              <button type="button" class="btn btn-primary btn-icon-text mb-2 mb-md-0" (click)=" AjouterImage(c)">
+                                Enregistrer
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+

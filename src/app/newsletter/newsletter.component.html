@@ -1,0 +1,23 @@
+
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title"><i class="mdi mdi-email"></i> Newsletter</h6>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let n of news">
+            <th>{{n.id}}</th>
+            <td>{{n.Email}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title"><i class="feather icon-user"></i> Clients</h6>
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Action</th>
+            <th>Nom Complet</th>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Téléphone</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let c of client">
+          <tr>
+            <th><button type="button" (click)="openXlModal(voirclient)" class="btn btn-primary"><i class="mdi mdi-eye"></i></button></th>
+            <td>{{c.NomComplet}}</td>
+            <td>{{c.UserName}}</td>
+            <td>{{c.Email}}</td>
+            <td>{{c.Telephone}}</td>
+          </tr>
+          <ng-template #voirclient let-modal class="border">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-body">
+                    <a routerLink="/" class="sidebar-brand nobleui-logo">
+                      VENTE<span>PRIVÉE</span>
+                     </a>
+                    <div class="row m-2">
+                      <h4 class="card-title"><i class="feather icon-user"></i> {{c.NomComplet}}</h4>
+                      <div class="col-md-6"><h5>Nom Complet : {{c.NomComplet}}</h5></div>
+                      <div class="col-md-6"><h5>Nom d'utilisateur : {{c.UserName}}</h5></div>
+                      <div class="col-md-6"><h5>Email : {{c.Email}}</h5></div>
+                      <div class="col-md-6"><h5>Téléphone : {{c.Telephone}}</h5></div>
+                      <div class="col-md-6"><h5>Genre : {{c.Genre}}</h5></div>
+                      <div class="col-md-6"><h5>Date de naissance : {{c.DateNaissance | date:'longDate'}} </h5></div>
+                      <div class="col-md-6"><h5>Ville : {{c.Ville}}</h5></div>
+                      <hr class="mt-2">
+                      <div class="col-md-6"><h5>Adresses : <ul *ngFor="let a of c.Adresse">
+                        <li>{{a}}</li>
+                      </ul></h5></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

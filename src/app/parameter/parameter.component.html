@@ -1,0 +1,306 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-10">
+        <h6 class="card-title"><i class="feather icon-settings"></i>&nbsp;&nbsp;&nbsp;Paramétres
+          de Produits</h6>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-outline-primary btn-icon-text me-2
+          mb-2 mb-md-0" (click)="openXlModal(AddParametre)">
+          <i class="feather icon-plus"></i>
+          Ajouter Paramétre
+        </button>
+      </div>
+      <div class="row mt-3">
+        <div class="table-responsive" >
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Catégorie</th>
+                <th>Sous Catégorie</th>
+                <th>Tailles</th>
+                <th>Couleurs</th>
+                <th>Genres</th>
+                <th>Groupe d'age</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let p of response">
+              <tr>
+                <th>{{p.id}}</th>
+                <td>{{p.Categorie}}</td>
+                <td>{{p.SousCategorie}}</td>
+                <td>{{p.Taille}}</td>
+                <td>{{p.Couleur}}</td>
+                <td>{{p.Genre}}</td>
+                <td>{{p.GroupeAge}}</td>
+                <td><button type="button" (click)="openXlModal(voirparametre)" class="btn btn-primary"><i class="mdi mdi-eye"></i></button>&nbsp;
+                    <button type="button" (click)="openXlModal(updateparameter)" class="btn btn-primary"><i class="mdi mdi-file-edit-outline"></i></button>&nbsp;
+                    <button type="button" (click)="DeleteParameter(p.id)" class="btn btn-primary"><i class="mdi mdi-delete"></i></button>
+                </td>
+              </tr>
+              <ng-template #voirparametre let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                        </a>
+                        <div class="row m-2">
+                          <div class="col-md-6"><h5>Catégorie : {{p.Categorie}}</h5></div>
+                          <div class="col-md-6"><h5>Sous Catégorie :
+                              {{p.SousCategorie}}</h5></div>
+                          <div class="col-md-6"><h5>Liste des Tailles :
+                              {{p.Taille}}</h5></div>
+                          <div class="col-md-6"><h5>Liste des Couleurs : {{p.Couleur}}</h5></div>
+                          <div class="col-md-6"><h5>Liste des Genres :
+                            {{p.Genre}}</h5></div>
+                            <div class="col-md-6"><h5>Groupe d'Age : {{p.GroupeAge}}</h5></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #updateparameter let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                        </a>
+                        <div class="row m-2">
+                          <form (ngSubmit)="UpdateParameter(p)">
+                            <div class="row mb-3">
+                              <div class="row mb-3">
+                                <div class="col-md-6"><h5>Catégorie : {{p.Categorie}}</h5></div>
+                                <div class="col-md-6"><h5>Sous Catégorie :
+                                    {{p.SousCategorie}}</h5></div>
+                                <div class="col-md-6"><h5>Liste des Tailles :
+                                    {{p.Taille}}</h5></div>
+                                <div class="col-md-6"><h5>Liste des Couleurs : {{p.Couleur}}</h5></div>
+                                <div class="col-md-6"><h5>Liste des Genres :
+                                  {{p.Genre}}</h5></div>
+                                  <div class="col-md-6"><h5>Groupe d'Age : {{p.GroupeAge}}</h5></div>
+                              </div>
+                                <hr>
+                              <div class="col-md-6">
+                                <label for="Taille" class="form-label">Tailles</label>
+                                <tag-input [(ngModel)]='taillelist'
+                                  theme="bootstrap"
+                                  [modelAsStrings]="true"
+                                  [ngModelOptions]="{standalone: true}">
+                                </tag-input>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="Couleur" class="form-label">Couleurs</label>
+                                <tag-input [(ngModel)]='couleurlist'
+                                  theme="bootstrap"
+                                  [modelAsStrings]="true"
+                                  [ngModelOptions]="{standalone: true}">
+                                </tag-input>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="Genre" class="form-label">Genres</label>
+                                <tag-input [(ngModel)]='GenreList'
+                                  theme="bootstrap"
+                                  [modelAsStrings]="true"
+                                  [ngModelOptions]="{standalone: true}">
+                                </tag-input>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="Genre" class="form-label">Groupe d'age</label>
+                                <tag-input [(ngModel)]='GroupList'
+                                  theme="bootstrap"
+                                  [modelAsStrings]="true"
+                                  [ngModelOptions]="{standalone: true}">
+                                </tag-input>
+                              </div>
+                            </div>
+                            <button class="btn btn-secondary" (click)="modal.close('by:
+                              close icon')" [swal]="{position: 'top-end', title:
+                              'Annulation', text: '', showConfirmButton: false, timer:
+                              5000, icon: 'error'}">Annuler</button>
+                            <button type="submit"class="btn btn-primary m-1"
+                              (click)="modal.close('by: close
+                              icon')">Enregistrer</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <ng-template #AddParametre let-modal class="border">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <a routerLink="/" class="sidebar-brand nobleui-logo">
+                VENTE<span>PRIVÉE</span>
+              </a>
+              <div class="row m-2">
+                <form>
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <label for="Categorie" class="form-label">Catégorie</label>
+                      <select class="form-select form-select-sm mb-3"
+                        (change)="CahngeCategorie($event)">
+                        <option value="Mode">Mode</option>
+                        <option value="Maison">Maison</option>
+                        <option value="Voyage">Voyagae</option>
+                        <option value="Beauté">Beauté</option>
+                        <option value="Gastronomie">Gastronomie</option>
+                        <option value="Enfant">Enfant</option>
+                        <option value="Loisir">Loisir</option>
+                        <option value="Sport">Sport</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="SousCategorie" class="form-label">Sous
+                        Catégorie</label>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Mode'">
+                        <option value="LE PRÊT-A-PORTER">LE PRÊT-A-PORTER</option>
+                        <option value="LA CHAUSSURE">LA CHAUSSURE</option>
+                        <option value="LES SACS & ACCESSOIRES">LES SACS &
+                          ACCESSOIRES</option>
+                        <option value="HOMME">L'HOMME</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Maison'">
+                        <option value="MAISON">MAISON</option>
+                        <option value="LE MOBILIER">LE MOBILIER</option>
+                        <option value="LA DÉCORATION">LA DÉCORATION</option>
+                        <option value="LE LINGE DE MAISON">LE LINGE DE MAISON</option>
+                        <option value="ÉLECTROMÉNAGER">L'ÉLECTROMÉNAGER</option>
+                        <option value="LA LITERIE">LA LITERIE</option>
+                        <option value="ART DE LA TABLE">L'ART DE LA TABLE</option>
+                        <option value="HIGH TECH">L'HIGH TECH</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Voyage'">
+                        <option value="COUPS DE COEUR">COUPS DE COEUR</option>
+                        <option value="TOP 5 DESTINATIONS">TOP 5 DESTINATIONS</option>
+                        <option value="EUROPE ET MÉDITERRANÉE">EUROPE ET
+                          MÉDITERRANÉE</option>
+                        <option value="DESTINATIONS LOINTAINES">DESTINATIONS
+                          LOINTAINES</option>
+                        <option value="CATALOGUE VOYAGE PERMANENT">CATALOGUE
+                          VOYAGE PERMANENT</option>
+                        <option value="DERNIERS JOURS">DERNIERS JOURS</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Beauté'">
+                        <option value="LES VENTES ÉPHÉMÈRES">LES VENTES
+                          ÉPHÉMÈRES</option>
+                        <option value="LES CHEVEUX">LES CHEVEUX</option>
+                        <option value="LE MAQUILLAGE">LE MAQUILLAGE</option>
+                        <option value="LES PARFUMS">LES PARFUMS</option>
+                        <option value="LES SOINS">LES SOINS</option>
+                        <option value="LE SPA">LE SPA</option>
+                        <option value="LES UNIVERS BEAUTÉ">LES UNIVERS BEAUTÉ</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Gastronomie'">
+                        <option value="LE GOUT DU JOUR">LE GOUT DU JOUR</option>
+                        <option value="ÉPICERIE">L'ÉPICERIE</option>
+                        <option value="LES PRODUITS FRAIS">LES PRODUITS FRAIS</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Enfant'">
+                        <option value="LA MODE">LA MODE</option>
+                        <option value="LE JOUET">LE JOUET</option>
+                        <option value="LE BEBE">LE BEBE</option>
+                        <option value="LE MOBILIER">LE MOBILIER</option>
+                        <option value="LES SÉJOURS EN FAMILLE">LES SÉJOURS EN
+                          FAMILLE</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Sport'">
+                        <option value="FITNESS">FITNESS</option>
+                        <option value="OUTDOOR">OUTDOOR</option>
+                        <option value="SPORTSWEAR">SPORTSWEAR</option>
+                      </select>
+                      <select class="form-select form-select-sm mb-3"
+                        [(ngModel)]="parameter.SousCategorie"
+                        [ngModelOptions]="{standalone: true}"
+                        *ngIf="parameter.Categorie=='Loisir'">
+                        <option value="ACTIVITÉS & SORTIES">ACTIVITÉS & SORTIES</option>
+                        <option value="JEUX & LOISIRS">JEUX & LOISIRS</option>
+                        <option value="ESCAPADES">ESCAPADES</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Taille" class="form-label">Tailles</label>
+                      <tag-input [(ngModel)]='taillelist'
+                        theme="bootstrap"
+                        [modelAsStrings]="true"
+                        [ngModelOptions]="{standalone: true}">
+                      </tag-input>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Couleur" class="form-label">Couleurs</label>
+                      <tag-input [(ngModel)]='couleurlist'
+                        theme="bootstrap"
+                        [modelAsStrings]="true"
+                        [ngModelOptions]="{standalone: true}">
+                      </tag-input>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Genre" class="form-label">Genres</label>
+                      <tag-input [(ngModel)]='GenreList'
+                        theme="bootstrap"
+                        [modelAsStrings]="true"
+                        [ngModelOptions]="{standalone: true}">
+                      </tag-input>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Genre" class="form-label">Groupe d'age</label>
+                      <tag-input [(ngModel)]='GroupList'
+                        theme="bootstrap"
+                        [modelAsStrings]="true"
+                        [ngModelOptions]="{standalone: true}">
+                      </tag-input>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" (click)="modal.close('by:
+                    close icon')" [swal]="{position: 'top-end', title:
+                    'Annulation', text: '', showConfirmButton: false, timer:
+                    5000, icon: 'error'}">Annuler</button>
+                  <button type="submit" [disabled]="!parameter.Categorie ||
+                    !parameter.SousCategorie" class="btn btn-primary m-1"
+                    (click)="modal.close('by: close
+                    icon')" (click)="Enregistrer()">Enregistrer</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
