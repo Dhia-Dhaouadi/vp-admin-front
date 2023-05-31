@@ -84,7 +84,6 @@ export class LivraisonComponent implements OnInit {
   DeleteLivraison(id: any) {
     this.livraisonservice.DeleteLivraison(id).subscribe((res) => {
       this.response = res;
-      console.log(this.response)
       if (this.response.message == 'Livraison deleted') {
         this.Getlivraison();
         Swal.fire({

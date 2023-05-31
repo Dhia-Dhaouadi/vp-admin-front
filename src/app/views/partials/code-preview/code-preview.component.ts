@@ -10,11 +10,10 @@ export class CodePreviewComponent implements OnInit {
   @Input() codeContent: any;
   defaultNavActiveId = undefined;
   copy: string = 'copy';
-  
+
   constructor() { }
 
   ngOnInit() {
-    // console.log(this.codeContent);
   }
 
   copied(e: any) {
@@ -24,8 +23,8 @@ export class CodePreviewComponent implements OnInit {
         this.copy = 'copy';
       }, 500);
     }
-    
-    
+
+
   }
 
 }

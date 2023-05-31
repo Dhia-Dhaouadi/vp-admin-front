@@ -34,7 +34,6 @@ TableSize: number = 5;
     this.categorieservice.UploadImage(formData).subscribe(res=>{
       this.response=res;
       this.Categorie.ImageCouverture = this.response.imageURL;
-      console.log(this.Categorie.ImageCouverture);
     })
   }
   AjouterImage(c:CategorieModel){

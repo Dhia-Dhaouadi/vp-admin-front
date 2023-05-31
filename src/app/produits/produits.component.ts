@@ -36,7 +36,6 @@ export class ProduitsComponent implements OnInit {
     this.GetBrand(this.produit.Categorie);
   }
   ChangeBrand(event: any) {
-    console.log(event.id)
     this.produit.Brand=event.BrandName;
     this.produit.SousCategorie=event.SousCategorie;
     this.GetParameter(this.produit.Categorie, this.produit.SousCategorie);

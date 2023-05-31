@@ -48,14 +48,11 @@ export class EditorsComponent implements OnInit {
   }
 
   onContentChanged = (event: ContentChange) => {
-    // console.log(event.html);
   }
 
   onFocus = () => {
-    console.log("On Focus");
   }
   onBlur = () => {
-    console.log("Blurred");
   }
 
 }
