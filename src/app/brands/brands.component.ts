@@ -13,24 +13,21 @@ export class BrandsComponent implements OnInit {
   categorie:any;
   Brand = new BrandModel();
   response:any;
+  nbrbrand:any;
   Page: number = 1;
   Count: number = 0;
   TableSize: number = 5;
   constructor(private modalService: NgbModal,private brandservice:BrandService)  { }
-
   ngOnInit() {
     this.Brand.Categorie = 'Mode';
     this.Brand.DateAjout = formatDate(new Date(), 'yyyy-MM-dd', 'en');
   }
-
   CahngeCategorie(event:any){
     this.Brand.Categorie = event.target.value;
   }
-
   CahngeCategorie1(event:any, c:BrandModel){
     c.Categorie = event.target.value;
   }
-
   openXlModal(content: TemplateRef<any>) {
     this.modalService
       .open(content, { size: 'xl' })
@@ -38,7 +35,6 @@ export class BrandsComponent implements OnInit {
       })
       .catch((res) => {});
   }
-
   Addbrand(){
     this.brandservice.AddBrand(this.Brand).subscribe(res=>{
       this.response=res;
@@ -66,18 +62,16 @@ export class BrandsComponent implements OnInit {
       }
     })
   }
-
   GetBrands(event:any){
     this.brandservice.BrandByCat(event.target.value).subscribe(res=>{
       this.response=res;
+      this.nbrbrand=this.response.length;
     })
   }
-
   OnTableDataChange(event: any) {
     this.Page = event;
     this.GetBrands(event);
   }
-
   UpdateBrand(c:BrandModel){
     this.brandservice.UpdateBrand(c.id,c).subscribe(res=>{
       this.response=res;
@@ -101,5 +95,4 @@ export class BrandsComponent implements OnInit {
       }
     })
   }
-
 }

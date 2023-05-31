@@ -9,6 +9,7 @@ import { CategorieComponent } from './categorie/categorie.component';
 import { BrandsComponent } from './brands/brands.component';
 import { ProduitsComponent } from './produits/produits.component';
 import { ParameterComponent } from './parameter/parameter.component';
+import { LivraisonComponent } from './livraison/livraison.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,10 @@ const routes: Routes = [
       {
         path: 'ParametreProduit',
         component : ParameterComponent
+      },
+      {
+        path: 'Livraison',
+        component : LivraisonComponent
       },
       {
         path: 'dashboard',

@@ -2,7 +2,16 @@
 <div class="card">
   <div class="card-body">
     <h6 class="card-title"><i class="mdi mdi-email"></i> Newsletter</h6>
-    <div class="table-responsive">
+    <div *ngIf="nbrnews==0">
+      <div class="row mt-7">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <h6>0 Newsletters</h6>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive" *ngIf="nbrnews>0">
       <table class="table">
         <thead>
           <tr>
@@ -11,13 +20,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let n of news">
+          <tr *ngFor="let n of news | paginate:{
+            itemsPerPage:TableSize,
+            currentPage:Page,
+            totalItems:Count }; let i= index">
             <th>{{n.id}}</th>
             <td>{{n.Email}}</td>
           </tr>
         </tbody>
       </table>
+      <div class="pagination mt-3">
+        <pagination-controls previousLabel="Prev" nextLabel="Next"
+          (pageChange)="OnTableDataChange($event)">
+        </pagination-controls>
+      </div>
     </div>
-
   </div>
 </div>

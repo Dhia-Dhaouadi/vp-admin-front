@@ -12,8 +12,17 @@
           Ajouter Paramétre
         </button>
       </div>
+      <div *ngIf="nbrparam==0">
+        <div class="row mt-7">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-8">
+            <h6>0 Paramétres</h6>
+          </div>
+        </div>
+      </div>
       <div class="row mt-3">
-        <div class="table-responsive" >
+        <div class="table-responsive" *ngIf="nbrparam>0">
           <table class="table">
             <thead>
               <tr>
@@ -27,7 +36,10 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody *ngFor="let p of response">
+            <tbody *ngFor="let p of response | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i= index">
               <tr>
                 <th>{{p.id}}</th>
                 <td>{{p.Categorie}}</td>
@@ -90,7 +102,7 @@
                                 <hr>
                               <div class="col-md-6">
                                 <label for="Taille" class="form-label">Tailles</label>
-                                <tag-input [(ngModel)]='taillelist'
+                                <tag-input [(ngModel)]='p.Taille'
                                   theme="bootstrap"
                                   [modelAsStrings]="true"
                                   [ngModelOptions]="{standalone: true}">
@@ -98,7 +110,7 @@
                               </div>
                               <div class="col-md-6">
                                 <label for="Couleur" class="form-label">Couleurs</label>
-                                <tag-input [(ngModel)]='couleurlist'
+                                <tag-input [(ngModel)]='p.Couleur'
                                   theme="bootstrap"
                                   [modelAsStrings]="true"
                                   [ngModelOptions]="{standalone: true}">
@@ -106,7 +118,7 @@
                               </div>
                               <div class="col-md-6">
                                 <label for="Genre" class="form-label">Genres</label>
-                                <tag-input [(ngModel)]='GenreList'
+                                <tag-input [(ngModel)]='p.Genre'
                                   theme="bootstrap"
                                   [modelAsStrings]="true"
                                   [ngModelOptions]="{standalone: true}">
@@ -114,7 +126,7 @@
                               </div>
                               <div class="col-md-6">
                                 <label for="Genre" class="form-label">Groupe d'age</label>
-                                <tag-input [(ngModel)]='GroupList'
+                                <tag-input [(ngModel)]='p.GroupeAge'
                                   theme="bootstrap"
                                   [modelAsStrings]="true"
                                   [ngModelOptions]="{standalone: true}">
@@ -137,6 +149,11 @@
               </ng-template>
             </tbody>
           </table>
+          <div class="pagination mt-3">
+            <pagination-controls previousLabel="Prev" nextLabel="Next"
+              (pageChange)="OnTableDataChange($event)">
+            </pagination-controls>
+          </div>
         </div>
       </div>
     </div>
@@ -256,7 +273,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="Taille" class="form-label">Tailles</label>
-                      <tag-input [(ngModel)]='taillelist'
+                      <tag-input [(ngModel)]='parameter.Taille'
                         theme="bootstrap"
                         [modelAsStrings]="true"
                         [ngModelOptions]="{standalone: true}">
@@ -264,7 +281,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="Couleur" class="form-label">Couleurs</label>
-                      <tag-input [(ngModel)]='couleurlist'
+                      <tag-input [(ngModel)]='parameter.Couleur'
                         theme="bootstrap"
                         [modelAsStrings]="true"
                         [ngModelOptions]="{standalone: true}">
@@ -272,7 +289,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="Genre" class="form-label">Genres</label>
-                      <tag-input [(ngModel)]='GenreList'
+                      <tag-input [(ngModel)]='parameter.Genre'
                         theme="bootstrap"
                         [modelAsStrings]="true"
                         [ngModelOptions]="{standalone: true}">
@@ -280,7 +297,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="Genre" class="form-label">Groupe d'age</label>
-                      <tag-input [(ngModel)]='GroupList'
+                      <tag-input [(ngModel)]='parameter.GroupeAge'
                         theme="bootstrap"
                         [modelAsStrings]="true"
                         [ngModelOptions]="{standalone: true}">

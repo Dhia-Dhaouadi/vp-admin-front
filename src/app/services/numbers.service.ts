@@ -1,40 +1,40 @@
 import { Injectable } from '@angular/core';
-import { ClientModel, NewlModel } from '../model/Client.model';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class ClientService {
+export class NumberService {
   constructor(private http: HttpClient) {}
-  AddClient(data: ClientModel): Observable<any> {
+
+  NbrBrand(): Observable<any> {
     const headers = new HttpHeaders();
-    return this.http.post(environment.apiurl+'/AddClient', data, {
+    return this.http.get(environment.apiurl+'/brandNbr',{
       headers: headers,
     });
   }
-  GetClients(): Observable<any> {
+  NbrClient(): Observable<any> {
     const headers = new HttpHeaders();
-    return this.http.get(environment.apiurl+'/Clients', {
+    return this.http.get(environment.apiurl+'/clientNbr',{
       headers: headers,
     });
   }
-  LoginAuth(data: any) {
+  NbrProduit(): Observable<any> {
     const headers = new HttpHeaders();
-    return this.http.post(environment.apiurl+'/AuthClient', data, {
+    return this.http.get(environment.apiurl+'/ProductNbr',{
       headers: headers,
     });
   }
-  AddNewsletter(data: NewlModel) {
+  NbrCategorie(): Observable<any> {
     const headers = new HttpHeaders();
-    return this.http.post(environment.apiurl+'/AddNewsletter', data, {
+    return this.http.get(environment.apiurl+'/CategorieNbr',{
       headers: headers,
     });
   }
-  GetNewsletter(): Observable<any> {
+  NbrNews(): Observable<any> {
     const headers = new HttpHeaders();
-    return this.http.get(environment.apiurl+'/Newsletters', {
+    return this.http.get(environment.apiurl+'/NewsletterNbr',{
       headers: headers,
     });
   }

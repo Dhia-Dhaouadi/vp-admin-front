@@ -41,6 +41,11 @@ export const MENU: MenuItem[] = [
     link: '/ParametreProduit',
   },
   {
+    label: 'Frais Livraisons',
+    icon: 'truck',
+    link: '/Livraison',
+  },
+  {
     label: 'Components',
     isTitle: true
   },

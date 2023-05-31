@@ -6,21 +6,342 @@
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-outline-primary btn-icon-text me-2
-          mb-2 mb-md-0" (click)="openXlModal(AddProduct)">
+          mb-2 mb-md-0" (click)="openXlModal(Addproduct)">
           <i class="feather icon-plus"></i>
           Ajouter Produit
         </button>
       </div>
     </div>
-    <ng-template #AddProduct let-modal class="border">
+    <div *ngIf="nbrprod==0">
+      <div class="row mt-7">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <h6>0 Produits</h6>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="table-responsive" *ngIf="nbrprod>0">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Catégorie</th>
+              <th>Sous Catégorie</th>
+              <th>Produit</th>
+              <th>Brand</th>
+              <th>Taille</th>
+              <th>Couleur</th>
+              <th>Genre</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+            <tbody *ngFor="let p of produits | paginate:{
+              itemsPerPage:TableSize,
+              currentPage:Page,
+              totalItems:Count }; let i= index" id="myTable">
+              <tr>
+                <th>{{p.id}}</th>
+                <td>{{p.Categorie}}</td>
+                <td>{{p.SousCategorie}}</td>
+                <td>{{p.Produit}}</td>
+                <td>{{p.Brand}}</td>
+                <td>{{p.Taille}}</td>
+                <td>{{p.Couleur}}</td>
+                <td>{{p.Genre}}</td>
+                <td>
+                    <button type="button" (click)="openXlModal(voirprod)" class="btn btn-primary"><i class="mdi mdi-eye"></i></button>&nbsp;
+                    <button type="button" (click)="openXlModal(updateproduit)" class="btn btn-primary"><i class="mdi mdi-file-edit-outline"></i></button>&nbsp;
+                    <button type="button" (click)="Deleteproduit(p.id)" class="btn btn-primary"><i class="mdi mdi-delete"></i></button>
+                </td>
+              </tr>
+              <ng-template #voirprod let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                        </a>
+                        <div class="row m-2">
+                          <div class="col-md-6"><h5>Catégorie : {{p.Categorie}}</h5></div>
+                          <div class="col-md-6"><h5>Sous Catégorie : {{p.SousCategorie}}</h5></div>
+                          <div class="col-md-6"><h5>Produit : {{p.Produit}}</h5></div>
+                          <div class="col-md-6"><h5>Brand : {{p.Brand}}</h5></div>
+                          <div class="col-md-6"><h5>Quantité dans Stock : {{p.QteDsStock}}</h5></div>
+                          <div class="col-md-6"><h5>Prix : {{p.Prix}} TND</h5></div>
+                          <div class="col-md-6"><h5>Couleur : {{p.Couleur}}</h5></div>
+                          <div class="col-md-6"><h5>Taille : {{p.Taille}}</h5></div>
+                          <div class="col-md-6"><h5>Genre : {{p.Genre}}</h5></div>
+                          <div class="col-md-6"><h5>Groupe d'Age : {{p.GroupeAge}}</h5></div>
+                          <div class="col-md-6"><h5>Reduction : {{p.Reduction}} %</h5></div>
+                          <div class="col-md-6"><h5>Prix aprés Reduction : {{p.PrixR}} TND</h5></div>
+                          <div class="col-md-6"><h5>Durée livraison : {{p.livraisonestime}}</h5></div>
+                          <div class="col-md-6"><h5>Prix de livraison : {{p.PrixLivraision}} TND</h5></div>
+                          <div class="col-md-6"><h5>Details de produit : {{p.DetailsP}}</h5></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #updateproduit let-modal class="border">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <a routerLink="/" class="sidebar-brand nobleui-logo">
+                          VENTE<span>PRIVÉE</span>
+                        </a>
+                        <div class="row m-2">
+                          <form (ngSubmit)="updateProduct(p)">
+                            <div class="row">
+                              <div class="col-md-6"><h5>Catégorie : {{p.Categorie}}</h5></div>
+                              <div class="col-md-6"><h5>Sous Catégorie : {{p.SousCategorie}}</h5></div>
+                              <div class="col-md-6 mb-3"><h5>Brand : {{p.Brand}}</h5></div>
+                              <hr>
+                              <div class="col-md-6">
+                                <label for="Brand" class="form-label">Produit</label>
+                                <input class="form-control" type="text"
+                                  [(ngModel)]="p.Produit"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="prix" class="form-label">Prix (TND)</label>
+                                <input class="form-control" type="number"
+                                  [(ngModel)]="p.Prix"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="qte" class="form-label">Quantité dans Stock</label>
+                                <input class="form-control" type="number"
+                                  [(ngModel)]="p.QteDsStock"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6" [hidden]="!p.Taille">
+                                <label for="taille" class="form-label">Taille</label>
+                                <select class="form-select form-select-sm mb-3" [(ngModel)]="p.Taille"
+                                [ngModelOptions]="{standalone: true}" required
+                                  *ngFor="let q of parametre">
+                                  <option *ngFor="let t of q.Taille" value={{t}}>{{t}}</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6" [hidden]="!p.Genre">
+                                <label for="Couleur" class="form-label">Genre</label>
+                                <select class="form-select form-select-sm mb-3" [(ngModel)]="p.Genre"
+                                [ngModelOptions]="{standalone: true}" required
+                                  *ngFor="let q of parametre">
+                                  <option *ngFor="let c of q.Genre" value={{c}}>{{c}}</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6" [hidden]="!p.GroupeAge">
+                                <label for="Couleur" class="form-label">Groupe d'Age</label>
+                                <select class="form-select form-select-sm mb-3" [(ngModel)]="p.GroupeAge"
+                                [ngModelOptions]="{standalone: true}" required
+                                  *ngFor="let q of parametre">
+                                  <option *ngFor="let c of q.GroupeAge" value={{c}}>{{c}}</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6" [hidden]="!p.Couleur">
+                                <label for="Couleur" class="form-label">Couleur</label>
+                                <select class="form-select form-select-sm mb-3" [(ngModel)]="p.Couleur"
+                                [ngModelOptions]="{standalone: true}" required
+                                  *ngFor="let q of parametre">
+                                  <option *ngFor="let c of q.Couleur" value={{c}}>{{c}}</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Prix livraison
+                                  (TND)</label>
+                                <input class="form-control" type="number"
+                                  [(ngModel)]="p.PrixLivraision"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Durée de livraison</label>
+                                <input class="form-control" type="text"
+                                  [(ngModel)]="p.livraisonestime"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Reduction (%)</label>
+                                <input class="form-control" type="number"
+                                  [(ngModel)]="p.Reduction"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Prix aprés
+                                  reduction (TND)</label>
+                                <input class="form-control" type="number"
+                                  [(ngModel)]="p.PrixR"
+                                  [ngModelOptions]="{standalone: true}" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Images</label>
+                                <input class="form-control" type="file" required/>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="livrap" class="form-label">Details /
+                                  Description de produit</label>
+                                <textarea class="form-control"
+                                  [(ngModel)]="p.DetailsP"
+                                  [ngModelOptions]="{standalone: true}" required></textarea>
+                              </div>
+                            </div>
+                            <button class="btn btn-secondary" (click)="modal.close('by:
+                              close icon')" [swal]="{position: 'top-end', title:
+                              'Annulation', text: '', showConfirmButton: false, timer:
+                              5000, icon: 'error'}">Annuler</button>
+                            <button type="submit"  [disabled]="!p.Categorie || !p.SousCategorie || !p.Brand  || !p.Produit || !p.QteDsStock || !p.Prix" class="btn btn-primary m-1"
+                              (click)="modal.close('by: close
+                              icon')">Enregistrer</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </tbody>
+        </table>
+        <div class="pagination mt-3">
+          <pagination-controls previousLabel="Prev" nextLabel="Next"
+            (pageChange)="OnTableDataChange($event)">
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+    <ng-template #Addproduct let-modal class="border">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-body">
               <a routerLink="/" class="sidebar-brand nobleui-logo">
                 VENTE<span>PRIVÉE</span>
-               </a>
+              </a>
               <div class="row m-2">
+                <form (ngSubmit)="AddProduct()">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="Categorie" class="form-label">Catégorie</label>
+                      <select class="form-select form-select-sm mb-3"
+                        (change)="CahngeCategorie($event)">
+                        <option value="Mode">Mode</option>
+                        <option value="Maison">Maison</option>
+                        <option value="Voyage">Voyagae</option>
+                        <option value="Beauté">Beauté</option>
+                        <option value="Gastronomie">Gastronomie</option>
+                        <option value="Enfant">Enfant</option>,
+                        <option value="Loisir">Loisir</option>
+                        <option value="Sport">Sport</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Brand" class="form-label">Brand</label>
+                      <select class="form-select form-select-sm mb-3"  required>
+                        <option *ngFor="let b of brand" (click)="ChangeBrand(b)" >{{b.BrandName}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Brand" class="form-label">Produit</label>
+                      <input class="form-control" type="text"
+                        [(ngModel)]="produit.Produit"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6 mt-4">
+                      <label  class="form-label">Sous Catégorie : {{produit.SousCategorie}}</label>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                      <label for="prix" class="form-label">Prix (TND)</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="produit.Prix"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                      <label for="qte" class="form-label">Quantité dans Stock</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="produit.QteDsStock"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                      <label for="taille" class="form-label">Taille</label>
+                      <select class="form-select form-select-sm mb-3" [(ngModel)]="produit.Taille"
+                      [ngModelOptions]="{standalone: true}" required
+                        *ngFor="let p of parametre">
+                        <option *ngFor="let t of p.Taille" value={{t}}>{{t}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                      <label for="Couleur" class="form-label">Couleur</label>
+                      <select class="form-select form-select-sm mb-3" [(ngModel)]="produit.Couleur"
+                      [ngModelOptions]="{standalone: true}" required
+                        *ngFor="let p of parametre">
+                        <option *ngFor="let c of p.Couleur" value={{c}}>{{c}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="Genre" class="form-label">Genre</label>
+                      <select class="form-select form-select-sm mb-3" [(ngModel)]="produit.Genre"
+                      [ngModelOptions]="{standalone: true}" required
+                        *ngFor="let p of parametre">
+                        <option *ngFor="let g of p.Genre" value={{g}}>{{g}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="GroupAge" class="form-label">Groupe d'Age</label>
+                      <select class="form-select form-select-sm mb-3" [(ngModel)]="produit.GroupeAge"
+                      [ngModelOptions]="{standalone: true}" required
+                        *ngFor="let p of parametre">
+                        <option *ngFor="let g of p.GroupeAge" value={{g}}>{{g}}</option>
+                      </select>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Prix livraison
+                        (TND)</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="produit.PrixLivraision"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Durée de livraison</label>
+                      <input class="form-control" type="text"
+                        [(ngModel)]="produit.livraisonestime"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Reduction (%)</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="produit.Reduction"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Prix aprés
+                        reduction (TND)</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="produit.PrixR"
+                        [ngModelOptions]="{standalone: true}" required/>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Images</label>
+                      <input class="form-control" type="file" required/>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="livrap" class="form-label">Details /
+                        Description de produit</label>
+                      <textarea class="form-control"
+                        [(ngModel)]="produit.DetailsP"
+                        [ngModelOptions]="{standalone: true}" required></textarea>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary" (click)="modal.close('by:
+                    close icon')" [swal]="{position: 'top-end', title:
+                    'Annulation', text: '', showConfirmButton: false, timer:
+                    5000, icon: 'error'}">Annuler</button>
+                  <button type="submit"  [disabled]="!produit.Categorie || !produit.SousCategorie || !produit.Brand  || !produit.Produit || !produit.QteDsStock || !produit.Prix" class="btn btn-primary m-1"
+                    (click)="modal.close('by: close
+                    icon')">Enregistrer</button>
+                </form>
               </div>
             </div>
           </div>

@@ -1,0 +1,131 @@
+<div class="card">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-10">
+        <h6 class="card-title"><i class="feather icon-truck"></i> Frais Livraison</h6>
+      </div>
+      <div class="col-md-2">
+        <button type="button" (click)="openXlModal(Addlivraison)"
+          class="btn btn-outline-primary btn-icon-text me-2
+          mb-2 mb-md-0">
+          <i class="feather icon-plus"></i>
+          Ajouter Livraison
+        </button>
+      </div>
+    </div>
+    <div *ngIf="nbrliv==0">
+      <div class="row mt-7">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <h6>0 Livraisons</h6>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3" *ngIf="nbrliv>0">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Region</th>
+              <th>Prix Livraison</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let l of livraisons">
+            <tr>
+              <td>{{l.id}}</td>
+              <td>{{l.Region}}</td>
+              <td>{{l.PrixLivraison}}&nbsp;TND</td>
+              <td><button type="button" class="btn btn-primary"><i
+                    class="mdi mdi-file-edit-outline" (click)="openXlModal(updatelivraison)"></i></button>&nbsp;
+                <button type="button" class="btn btn-primary" (click)="DeleteLivraison(l.id)"><i
+                    class="mdi mdi-delete"></i></button></td>
+            </tr>
+            <ng-template #updatelivraison let-modal class="border">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <a routerLink="/" class="sidebar-brand nobleui-logo">
+                        VENTE<span>PRIVÉE</span>
+                      </a>
+                      <div class="row m-2">
+                        <form (ngSubmit)="UpdateLivraison(l)">
+                          <div class="row">
+                            <div class="col-md-6 mt-3">
+                              <label for="region" class="form-label">Region : {{l.Region}}</label>
+                            </div>
+                            <div class="col-md-6">
+                              <label for="region" class="form-label">Prix Livraison TND</label>
+                              <input class="form-control" type="number"
+                                [(ngModel)]="l.PrixLivraison"
+                                [ngModelOptions]="{standalone: true}" required />
+                            </div>
+                          </div>
+                          <button class="btn btn-secondary mt-3"
+                            (click)="modal.close('by:
+                            close icon')" [swal]="{position: 'top-end', title:
+                            'Annulation', text: '', showConfirmButton: false, timer:
+                            5000, icon: 'error'}">Annuler</button> &nbsp;
+                          <button type="submit"
+                            [disabled]="!l.PrixLivraison"
+                            class="btn btn-primary mt-3"
+                            (click)="modal.close('by: close
+                            icon')">Enregistrer</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <ng-template #Addlivraison let-modal class="border">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <a routerLink="/" class="sidebar-brand nobleui-logo">
+                VENTE<span>PRIVÉE</span>
+              </a>
+              <div class="row m-2">
+                <form (ngSubmit)="AddLivraison()">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <label for="region" class="form-label">Region</label>
+                      <input class="form-control" type="text"
+                        [(ngModel)]="livraison.Region"
+                        [ngModelOptions]="{standalone: true}" required />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="region" class="form-label">Prix Livraison TND</label>
+                      <input class="form-control" type="number"
+                        [(ngModel)]="livraison.PrixLivraison"
+                        [ngModelOptions]="{standalone: true}" required />
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary mt-3"
+                    (click)="modal.close('by:
+                    close icon')" [swal]="{position: 'top-end', title:
+                    'Annulation', text: '', showConfirmButton: false, timer:
+                    5000, icon: 'error'}">Annuler</button> &nbsp;
+                  <button type="submit"
+                    [disabled]="!livraison.PrixLivraison || !livraison.Region"
+                    class="btn btn-primary mt-3"
+                    (click)="modal.close('by: close
+                    icon')">Enregistrer</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

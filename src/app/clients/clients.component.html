@@ -1,7 +1,16 @@
 <div class="card">
   <div class="card-body">
     <h6 class="card-title"><i class="feather icon-user"></i> Clients</h6>
-    <div class="table-responsive">
+    <div *ngIf="nbrclien==0">
+      <div class="row mt-7">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <h6>0 Clients</h6>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive" *ngIf="nbrclien>0">
       <table class="table">
         <thead>
           <tr>
@@ -12,7 +21,10 @@
             <th>Téléphone</th>
           </tr>
         </thead>
-        <tbody *ngFor="let c of client">
+        <tbody *ngFor="let c of client | paginate:{
+          itemsPerPage:TableSize,
+          currentPage:Page,
+          totalItems:Count }; let i= index">
           <tr>
             <th><button type="button" (click)="openXlModal(voirclient)" class="btn btn-primary"><i class="mdi mdi-eye"></i></button></th>
             <td>{{c.NomComplet}}</td>
@@ -49,6 +61,11 @@
           </ng-template>
         </tbody>
       </table>
+      <div class="pagination mt-3">
+        <pagination-controls previousLabel="Prev" nextLabel="Next"
+          (pageChange)="OnTableDataChange($event)">
+        </pagination-controls>
+      </div>
     </div>
   </div>
 </div>

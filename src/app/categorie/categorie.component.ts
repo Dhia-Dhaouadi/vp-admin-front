@@ -10,21 +10,23 @@ import { CategorieModel } from '../model/Categorie.model';
 })
 export class CategorieComponent implements OnInit {
 categorie:any;
+nbrcat:any;
 response:any;
 imageURL:any;
 Categorie = new CategorieModel();
+Page: number = 1;
+Count: number = 0;
+TableSize: number = 5;
   constructor(private categorieservice:CategorieService,private modalService: NgbModal) { }
-
   ngOnInit(): void {
     this.GetCategorie();
   }
-
   GetCategorie(){
     this.categorieservice.GetGategories().subscribe(res=>{
       this.categorie=res;
+      this.nbrcat=this.categorie.length;
     })
   }
-
   uploadImage(event:any) {
     const file = event.target.files[0];
     const formData = new FormData();
@@ -35,19 +37,21 @@ Categorie = new CategorieModel();
       console.log(this.Categorie.ImageCouverture);
     })
   }
-
   AjouterImage(c:CategorieModel){
     c.ImageCouverture = this.Categorie.ImageCouverture;
     this.categorieservice.UpdateCategorie(c.id,c).subscribe(res=>{
       this.response=res;
     })
   }
-
   openXlModal(content: TemplateRef<any>) {
     this.modalService
       .open(content, { size: 'xl' })
       .result.then((result) => {
       })
       .catch((res) => {});
+  }
+  OnTableDataChange(event: any) {
+    this.Page = event;
+    this.GetCategorie();
   }
 }

@@ -25,6 +25,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ParameterComponent } from './parameter/parameter.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TagInputModule } from 'ngx-chips';
+import { LivraisonComponent } from './livraison/livraison.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TagInputModule } from 'ngx-chips';
     BrandsComponent,
     ProduitsComponent,
     ParameterComponent,
+    LivraisonComponent,
   ],
   imports: [
     BrowserModule,

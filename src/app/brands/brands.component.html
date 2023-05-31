@@ -41,11 +41,20 @@
         id="btnradio8" autocomplete="off">
       <label class="btn btn-outline-primary" for="btnradio8">Loisir</label>
     </div>
-      <div *ngIf="response">
+    <div *ngIf="nbrbrand==0">
+      <div class="row mt-7">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <h6>0 Brands</h6>
+        </div>
+      </div>
+    </div>
+      <div  *ngIf="nbrbrand>0">
         <div class="spinner-border text-primary loading" role="status"
         *ngIf="!response">
       </div>
-      <table class="table">
+      <table class="table mt-5">
         <thead>
           <tr>
             <th>#</th>
