@@ -26,6 +26,8 @@ import { ParameterComponent } from './parameter/parameter.component';
 import { NgxMaskModule } from 'ngx-mask';
 import { TagInputModule } from 'ngx-chips';
 import { LivraisonComponent } from './livraison/livraison.component';
+import { CommandeComponent } from './commande/commande.component';
+import { CommandepardateComponent } from './commandepardate/commandepardate.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { LivraisonComponent } from './livraison/livraison.component';
     ProduitsComponent,
     ParameterComponent,
     LivraisonComponent,
+    CommandeComponent,
+    CommandepardateComponent,
   ],
   imports: [
     BrowserModule,

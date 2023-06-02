@@ -1,203 +1,67 @@
-<div class="row">
-  <div class="col-12 col-xl-12 stretch-card">
-    <div class="row flex-grow-1">
-      <div class="col-md-2 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h3 class="cateprod"><i class="mdi mdi-calendar-clock"></i>
-                {{dateTime |async| date:'medium' }}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 grid-margin stretch-card" type="button"
-        routerLink="/Categories">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h3>Catégories</h3>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5 cateprod"  *ngFor="let nbr of nbrcategorie">
-                <h1 class="mb-2 mt-3">{{nbr.count}}</h1>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <i class="feather icon-package icc"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 grid-margin stretch-card" type="button"
-        routerLink="/Brands">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h3>Brands</h3>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5 cateprod" *ngFor="let nbr of nbrbrand">
-                <h1 class="mb-2 mt-3">{{nbr.count}}</h1>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <i class="feather icon-bold icc"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 grid-margin stretch-card" type="button"
-        routerLink="/Products">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h3>Produits</h3>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5 cateprod" *ngFor="let nbr of nbrproduit">
-                <h1 class="mb-2 mt-3">{{nbr.count}}</h1>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <i class="feather icon-tag icc"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 grid-margin stretch-card" type="button"
-        routerLink="/Clients">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline">
-              <h3>Clients</h3>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5 cateprod" *ngFor="let nbr of nbrclient">
-                <h1 class="mb-2 mt-3">{{nbr.count}}</h1>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <i class="feather icon-user-check icc"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-2 grid-margin stretch-card" type="button"
-        routerLink="/Newsletter">
-        <div class="card">
-          <div class="card-body">
-            <div class="d-flex justify-content-between align-items-baseline" >
-              <h3>Newsletter</h3>
-            </div>
-            <div class="row">
-              <div class="col-6 col-md-12 col-xl-5 cateprod" *ngFor="let nbr of nbrnews">
-                <h1 class="mb-2 mt-3">{{nbr.count}}</h1>
-                <div class="d-flex align-items-baseline">
-                  <p class="text-success">
-                  </p>
-                </div>
-              </div>
-              <div class="col-6 col-md-12 col-xl-7">
-                <i class="mdi mdi-email-open icc"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="d-flex justify-content-between align-items-baseline">
+  <h3 class="cateprod"><i class="mdi mdi-calendar-clock"></i>
+    {{dateTime |async| date:'medium' }}</h3>
 </div>
-<div class="row">
-  <div class="col-lg-5 col-xl-4 grid-margin grid-margin-xl-0 stretch-card">
+<div class="row mt-3">
+  <div class="col-lg-2 col-xl-2 grid-margin grid-margin-xl-0 stretch-card">
     <div class="card">
       <div class="card-body">
-        <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Clients
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Nombre de Commandes</h6>
-        </div>
         <div class="d-flex flex-column mt-5">
-          <a href="" (click)="false" class="d-flex align-items-center
+          <a  routerLink="/Categories" class="d-flex align-items-center
             border-bottom pb-3">
             <div class="me-3">
             </div>
             <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h6 class="text-body mb-2">Leonardo Payne</h6>
-                <p class="text-muted tx-12">12.30 PM</p>
+              <div class="d-flex justify-content-between" *ngFor="let nbr of nbrcategorie">
+                <span class="badge bg-danger"><h6>{{nbr.count}} Catégories</h6></span>
               </div>
             </div>
           </a>
-          <a href="" (click)="false" class="d-flex align-items-center
+          <a routerLink="/Brands" class="d-flex align-items-center
             border-bottom py-3">
             <div class="me-3">
             </div>
             <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h6 class="text-body mb-2">Carl Henson</h6>
-                <p class="text-muted tx-12">02.14 AM</p>
+              <div class="d-flex justify-content-between"  *ngFor="let nbr of nbrbrand">
+                <span class="badge bg-primary"><h6>{{nbr.count}} Brands</h6></span>
               </div>
-              <p class="text-muted tx-13">I've finished it! See you so..</p>
             </div>
           </a>
-          <a href="" (click)="false" class="d-flex align-items-center
+          <a  routerLink="/Products" class="d-flex align-items-center
             border-bottom py-3">
             <div class="me-3">
             </div>
             <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h6 class="text-body mb-2">Jensen Combs</h6>
-                <p class="text-muted tx-12">08.22 PM</p>
+              <div class="d-flex justify-content-between" *ngFor="let nbr of nbrproduit">
+                <span class="badge bg-success"><h6>{{nbr.count}} Produits</h6></span>
               </div>
-              <p class="text-muted tx-13">This template is awesome!</p>
             </div>
           </a>
-          <a href="" (click)="false" class="d-flex align-items-center
+          <a routerLink="/Clients" class="d-flex align-items-center
             border-bottom py-3">
             <div class="me-3">
             </div>
             <div class="w-100">
-              <div class="d-flex justify-content-between">
-                <h6 class="text-body mb-2">Amiah Burton</h6>
-                <p class="text-muted tx-12">05.49 AM</p>
+              <div class="d-flex justify-content-between" *ngFor="let nbr of nbrclient">
+                <span class="badge bg-info"><h6>{{nbr.count}} Clients</h6></span>
               </div>
-              <p class="text-muted tx-13">Nice to meet you</p>
             </div>
           </a>
-          <a href="" (click)="false" class="d-flex align-items-center
+          <a routerLink="/Clients" class="d-flex align-items-center
             border-bottom py-3">
             <div class="me-3">
             </div>
-            <div class="w-100">
+            <div class="w-100" *ngFor="let nbr of nbrnews">
               <div class="d-flex justify-content-between">
-                <h6 class="text-body mb-2">Yaretzi Mayo</h6>
-                <p class="text-muted tx-12">01.19 AM</p>
+                <span class="badge bg-warning"><h6>{{nbr.count}} Newsletters</h6></span>
               </div>
-              <p class="text-muted tx-13">Hey! there I'm available...</p>
             </div>
           </a>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-lg-7 col-xl-8 stretch-card">
+  <div class="col-lg-10 col-xl-10 stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">

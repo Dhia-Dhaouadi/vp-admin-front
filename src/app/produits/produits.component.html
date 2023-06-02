@@ -224,7 +224,7 @@
                 <form (ngSubmit)="AddProduct()">
                   <div class="row">
                     <div class="col-md-6">
-                      <label for="Categorie" class="form-label">Catégorie</label>
+                      <label for="Categorie" class="form-label">Catégorie *</label>
                       <select class="form-select form-select-sm mb-3"
                         (change)="CahngeCategorie($event)">
                         <option value="Mode">Mode</option>
@@ -238,28 +238,29 @@
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="Brand" class="form-label">Brand</label>
+                      <label for="Brand" class="form-label">Brand *</label>
                       <select class="form-select form-select-sm mb-3"  required>
+                        <option></option>
                         <option *ngFor="let b of brand" (click)="ChangeBrand(b)" >{{b.BrandName}}</option>
                       </select>
                     </div>
                     <div class="col-md-6">
-                      <label for="Brand" class="form-label">Produit</label>
+                      <label for="Brand" class="form-label">Produit *</label>
                       <input class="form-control" type="text"
                         [(ngModel)]="produit.Produit"
                         [ngModelOptions]="{standalone: true}" required/>
                     </div>
                     <div class="col-md-6 mt-4">
-                      <label  class="form-label">Sous Catégorie : {{produit.SousCategorie}}</label>
+                      <label  class="form-label">Sous Catégorie *: {{produit.SousCategorie}}</label>
                     </div>
                     <div class="col-md-6 mt-3">
-                      <label for="prix" class="form-label">Prix (TND)</label>
+                      <label for="prix" class="form-label">Prix (TND) *</label>
                       <input class="form-control" type="number"
                         [(ngModel)]="produit.Prix"
                         [ngModelOptions]="{standalone: true}" required/>
                     </div>
                     <div class="col-md-6 mt-3">
-                      <label for="qte" class="form-label">Quantité dans Stock</label>
+                      <label for="qte" class="form-label">Quantité dans Stock *</label>
                       <input class="form-control" type="number"
                         [(ngModel)]="produit.QteDsStock"
                         [ngModelOptions]="{standalone: true}" required/>
@@ -298,7 +299,7 @@
                     </div>
                     <div class="col-md-6">
                       <label for="livrap" class="form-label">Prix livraison
-                        (TND)</label>
+                        (TND) *</label>
                       <input class="form-control" type="number"
                         [(ngModel)]="produit.PrixLivraision"
                         [ngModelOptions]="{standalone: true}" required/>
@@ -338,7 +339,7 @@
                     close icon')" [swal]="{position: 'top-end', title:
                     'Annulation', text: '', showConfirmButton: false, timer:
                     5000, icon: 'error'}">Annuler</button>
-                  <button type="submit"  [disabled]="!produit.Categorie || !produit.SousCategorie || !produit.Brand  || !produit.Produit || !produit.QteDsStock || !produit.Prix" class="btn btn-primary m-1"
+                  <button type="submit"  [disabled]="!produit.Categorie || !produit.SousCategorie || !produit.Brand  || !produit.Produit || !produit.QteDsStock || !produit.Prix || !produit.PrixLivraision" class="btn btn-primary m-1"
                     (click)="modal.close('by: close
                     icon')">Enregistrer</button>
                 </form>

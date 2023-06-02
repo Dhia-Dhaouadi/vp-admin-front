@@ -2,10 +2,6 @@ import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
   {
-    label: 'Main',
-    isTitle: true
-  },
-  {
     label: 'Dashboard',
     icon: 'home',
     link: '/dashboard'
@@ -41,9 +37,14 @@ export const MENU: MenuItem[] = [
     link: '/ParametreProduit',
   },
   {
-    label: 'Frais Livraisons',
-    icon: 'truck',
-    link: '/Livraison',
+    label: 'Commande aujourdhui',
+    icon: 'file',
+    link: '/CommandeAujourdhui',
+  },
+  {
+    label: 'Commande par date',
+    icon: 'calendar',
+    link: '/CommandeParDate',
   },
   {
     label: 'Components',

@@ -10,6 +10,8 @@ import { BrandsComponent } from './brands/brands.component';
 import { ProduitsComponent } from './produits/produits.component';
 import { ParameterComponent } from './parameter/parameter.component';
 import { LivraisonComponent } from './livraison/livraison.component';
+import { CommandeComponent } from './commande/commande.component';
+import { CommandepardateComponent } from './commandepardate/commandepardate.component';
 
 
 const routes: Routes = [
@@ -46,6 +48,14 @@ const routes: Routes = [
       {
         path: 'Livraison',
         component : LivraisonComponent
+      },
+      {
+        path: 'CommandeAujourdhui',
+        component : CommandeComponent
+      },
+      {
+        path: 'CommandeParDate',
+        component : CommandepardateComponent
       },
       {
         path: 'dashboard',
